@@ -2,11 +2,11 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useCart } from '@/context/CartContext';
+import styles from '../styles/Cart.module.css';
+import CartItemCard from '@/components/CartItemCard';
 
 export default function CartPage() {
-  const { cartItems } = useCart();
-
-  const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+  const { cartItems, getCartTotal } = useCart();
 
   return (
     <div>
@@ -15,24 +15,23 @@ export default function CartPage() {
         <meta name="description" content="Sepetinizdeki ürünler" />
       </Head>
 
-      <main style={{ padding: '2rem' }}>
+      <main className={styles.mainContent}>
         <h1>Sepetim</h1>
         {cartItems.length === 0 ? (
-          <p>Sepetinizde ürün bulunmamaktadır. <Link href="/products">Ürünlerimize göz atın!</Link></p>
+          <p className={styles.emptyCartMessage}>
+            Sepetinizde ürün bulunmamaktadır. <Link href="/products">Ürünlerimize göz atın!</Link>
+          </p>
         ) : (
           <div>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              {cartItems.map((item, index) => (
-                <li key={index} style={{ marginBottom: '0.5rem', borderBottom: '1px dashed #eee', paddingBottom: '0.5rem' }}>
-                  {item.name} - {item.price}₺
-                  {/* Sepetten silme butonu ekleyebilirsiniz */}
-                  {/* <button onClick={() => removeFromCart(item.id)}>Sil</button> */}
-                </li>
-              ))}
+            <ul className={styles.cartList}>
+              {/* Buradaki map ve return yapısını kontrol edin */}
+              {cartItems.map((item) => ( // Bu parantez map fonksiyonunun arrow function'ını başlatır ve JSX döndüreceğini belirtir
+                <CartItemCard key={item.id} item={item} />
+              ))} {/* Bu parantez map fonksiyonunun arrow function'ını ve map çağrısını kapatır */}
             </ul>
-            <h2 style={{ marginTop: '2rem' }}>Toplam: {totalPrice}₺</h2>
+            <h2 className={styles.cartTotal}>Toplam: {getCartTotal()}₺</h2>
             <Link href="/checkout">
-              <button style={{ padding: '1rem 2rem', fontSize: '1.2rem', cursor: 'pointer' }}>Ödemeye Geç</button>
+              <button className={styles.checkoutButton}>Ödemeye Geç</button>
             </Link>
           </div>
         )}

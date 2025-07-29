@@ -1,5 +1,6 @@
 // src/pages/about.tsx
 import Head from 'next/head';
+import styles from '../styles/About.module.css'; // CSS Modülünü import ediyoruz
 
 export default function AboutPage() {
   return (
@@ -9,7 +10,7 @@ export default function AboutPage() {
         <meta name="description" content="Kahve Dükkanımız Hakkında" />
       </Head>
 
-      <main style={{ padding: '2rem' }}>
+      <main className={styles.mainContent}>
         <h1>Hakkımızda</h1>
         <p>
           Kahve Dükkanı olarak, en taze ve kaliteli kahve çekirdeklerini dünyanın dört bir yanından getirerek size eşsiz bir kahve deneyimi sunmayı hedefliyoruz.

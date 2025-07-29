@@ -1,10 +1,21 @@
 // src/pages/checkout.tsx
 import Head from 'next/head';
-import Link from 'next/link';
+import { useEffect } from 'react';
+import { useCart } from '@/context/CartContext';
+import { useRouter } from 'next/router';
+import styles from '../styles/Checkout.module.css'; // CSS Modülünü import ediyoruz
 
 export default function CheckoutPage() {
-  // Gerçek bir ödeme işlemi burada entegre edilebilir.
-  // Basitlik adına şu an için sadece bir başarı mesajı gösteriyoruz.
+  const { clearCart } = useCart();
+  const router = useRouter();
+
+  useEffect(() => {
+    clearCart();
+  }, []);
+
+  const handleGoHome = () => {
+    router.push('/');
+  };
 
   return (
     <div>
@@ -13,12 +24,16 @@ export default function CheckoutPage() {
         <meta name="description" content="Ödeme İşlemi" />
       </Head>
 
-      <main style={{ padding: '2rem', textAlign: 'center' }}>
+      <main className={styles.mainContent}>
         <h1>Ödeme Başarılı!</h1>
         <p>Siparişiniz için teşekkür ederiz. Kahveniz en kısa sürede hazırlanacaktır.</p>
-        <Link href="/">
-          <button style={{ padding: '1rem 2rem', fontSize: '1.2rem', cursor: 'pointer', marginTop: '1rem' }}>Ana Sayfaya Dön</button>
-        </Link>
+
+        <button
+          onClick={handleGoHome}
+          className={styles.homeButton}
+        >
+          Ana Sayfaya Dön
+        </button>
       </main>
     </div>
   );

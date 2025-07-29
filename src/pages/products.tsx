@@ -1,6 +1,7 @@
 // src/pages/products.tsx
 import Head from 'next/head';
-import { useCart } from "@/context/CartContext";
+import styles from '../styles/Products.module.css';
+import ProductCard from '@/components/ProductCard';
 
 const coffeeList = [
   { id: 1, name: "Espresso", price: 20 },
@@ -11,8 +12,6 @@ const coffeeList = [
 ];
 
 export default function ProductsPage() {
-  const { addToCart } = useCart();
-
   return (
     <div>
       <Head>
@@ -20,16 +19,13 @@ export default function ProductsPage() {
         <meta name="description" content="En taze kahvelerimiz" />
       </Head>
 
-      <main style={{ padding: '2rem' }}>
+      <main className={styles.mainContent}>
         <h1>Kahvelerimiz</h1>
-        <ul style={{ listStyle: 'none', padding: 0 }}>
-          {coffeeList.map((coffee) => (
-            <li key={coffee.id} style={{ marginBottom: '1rem', border: '1px solid #ccc', padding: '1rem' }}>
-              <h3>{coffee.name}</h3>
-              <p>Fiyat: {coffee.price}₺</p>
-              <button onClick={() => addToCart(coffee)} style={{ padding: '0.5rem 1rem', cursor: 'pointer' }}>Sepete Ekle</button>
-            </li>
-          ))}
+        <ul className={styles.productList}>
+          {/* Buradaki map ve return yapısını kontrol edin */}
+          {coffeeList.map((coffee) => ( // Bu parantez map fonksiyonunun arrow function'ını başlatır ve JSX döndüreceğini belirtir
+            <ProductCard key={coffee.id} coffee={coffee} />
+          ))} {/* Bu parantez map fonksiyonunun arrow function'ını ve map çağrısını kapatır */}
         </ul>
       </main>
     </div>

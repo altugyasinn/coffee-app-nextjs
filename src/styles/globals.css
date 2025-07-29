@@ -1,12 +1,67 @@
+/* src/styles/globals.css */
+html,
 body {
-  font-family: sans-serif;
-  padding: 2rem;
-  background-color: #fdfdfd;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  line-height: 1.6;
+  font-size: 18px; /* Temel font boyutu */
+  background-color: #f8f8f8;
+  color: #333;
 }
-h1 {
-  color: #3b3b3b;
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
-nav a {
-  margin-right: 10px;
-  text-decoration: underline;
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3 {
+  color: #555;
+  margin-top: 0; /* Başlıkların üst boşluğunu sıfırlayarak daha kolay kontrol edelim */
+  margin-bottom: 0.5em; /* Kendi birimleriyle boşluk verelim */
+}
+
+button {
+  border: 1px solid #ccc;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  background-color: #0070f3;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #005bb5;
+}
+
+/* Kapsayıcı main etiketleri için maksimum genişlik ve ortalama */
+main {
+  max-width: 1200px; /* Maksimum genişlik */
+  margin: 0 auto; /* Ortala */
+  padding: 1rem; /* Yanlarda boşluk bırak */
+}
+
+/* Küçük ekranlarda temel font boyutunu ayarlayabiliriz */
+@media (max-width: 768px) {
+  html, body {
+    font-size: 16px; /* Daha küçük ekranlarda fontu biraz küçült */
+  }
+
+  /* Main padding'ini küçük ekranlarda artırabiliriz */
+  main {
+      padding: 1rem; /* Zaten 1rem, ama gerektiğinde burada değiştirebilirsiniz */
+  }
+}
+
+@media (max-width: 480px) {
+  html, body {
+    font-size: 15px; /* Daha da küçük ekranlarda */
+  }
 }

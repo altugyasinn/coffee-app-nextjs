@@ -1,0 +1,45 @@
+/* src/components/ProductCard.module.css */
+.productItem {
+  border: 1px solid #ccc;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.productItem h3 {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.3rem; /* Font boyutunu biraz daha esnek yapalım */
+}
+
+.productItem p {
+  color: #666;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.addToCartButton {
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+  .productItem {
+    padding: 1rem; /* Mobil cihazlarda daha az padding */
+  }
+  .productItem h3 {
+      font-size: 1.2rem;
+  }
+  .productItem p {
+      font-size: 1rem;
+  }
+  .addToCartButton {
+      padding: 0.7rem 1.2rem;
+      font-size: 0.9rem;
+  }
+}

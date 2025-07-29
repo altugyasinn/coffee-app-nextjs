@@ -1,0 +1,48 @@
+/* src/styles/Cart.module.css */
+.mainContent {
+  padding: 2rem;
+}
+
+.cartList {
+  list-style: none;
+  padding: 0;
+}
+
+/* .cartItem stilleri CartItemCard.module.css'e taşındı */
+
+.cartTotal {
+  margin-top: 2rem;
+  text-align: right;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.checkoutButton {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.emptyCartMessage {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.emptyCartMessage a {
+    color: #0070f3;
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .cartTotal {
+      font-size: 1.3rem;
+  }
+  .checkoutButton {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+  }
+}

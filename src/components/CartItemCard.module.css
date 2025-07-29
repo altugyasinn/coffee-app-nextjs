@@ -1,0 +1,72 @@
+/* src/components/CartItemCard.module.css */
+.cartItem {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap; /* Mobil cihazlarda düğmelerin alt satıra geçmesi için */
+}
+
+.cartItem span {
+  flex-grow: 1;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem; /* Mobil düğmeler alt satıra geçtiğinde boşluk */
+  font-size: 1.1rem;
+}
+
+.cartItem div {
+  display: flex; /* Düğmeleri yan yana tutmak için */
+  margin-bottom: 0.5rem; /* Mobil düğmeler alt satıra geçtiğinde boşluk */
+}
+
+.cartItem button {
+  padding: 0.3rem 0.6rem;
+  margin-left: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem; /* Düğme font boyutunu küçült */
+}
+
+.removeButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+}
+
+.removeButton:hover {
+  background: #c82333;
+}
+
+.quantityButton {
+    background: #6c757d;
+    color: white;
+    border: none;
+}
+
+.quantityButton:hover {
+    background: #5a6268;
+}
+
+@media (max-width: 480px) {
+  .cartItem {
+      flex-direction: column; /* Tamamen dikey yığılabilir */
+      align-items: flex-start; /* Sola hizala */
+  }
+  .cartItem span {
+      width: 100%; /* Tüm genişliği kapla */
+      margin-right: 0;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-size: 1rem;
+  }
+  .cartItem div {
+      width: 100%; /* Düğmelerin de genişliği kaplaması */
+      justify-content: center; /* Düğmeleri ortala */
+  }
+  .cartItem button {
+      flex-grow: 1; /* Düğmelerin esnemesi */
+      margin: 0 0.2rem; /* Aralarındaki boşluğu azalt */
+      font-size: 0.8rem;
+  }
+}
