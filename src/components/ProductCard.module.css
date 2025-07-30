@@ -1,45 +1,56 @@
 /* src/components/ProductCard.module.css */
-.productItem {
-  border: 1px solid #ccc;
-  padding: 1.5rem;
+
+.productCard {
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  display: flex; /* Flexbox kullanarak içeriği düzenleyelim */
+  flex-direction: column; /* İçeriği dikey sırala */
+  align-items: center; /* Yatayda ortala */
+  justify-content: space-between; /* İçeriği eşit boşluklarla yay */
+  width: 250px; /* Kart genişliğini sabitleyin veya ayarlayın */
+  margin: 10px; /* Kartlar arasında boşluk bırakın */
+  box-sizing: border-box; /* Padding'in genişliğe dahil olmasını sağlar */
 }
 
-.productItem h3 {
-  margin-top: 0;
+.productImage {
+  max-width: 100%; /* Resmin kartın genişliğine sığmasını sağlar */
+  height: 150px; /* Resmin yüksekliğini sabitleyin */
+  object-fit: cover; /* Resmin belirlenen alana sığarken oranını korumasını sağlar */
+  border-radius: 4px; /* Köşeleri biraz yuvarla */
+  margin-bottom: 10px; /* Resim ile metin arasına boşluk */
+}
+
+.productName {
+  font-size: 1.2em;
+  margin-bottom: 5px;
   color: #333;
-  font-size: 1.3rem; /* Font boyutunu biraz daha esnek yapalım */
 }
 
-.productItem p {
+.productPrice {
+  font-size: 1.1em;
   color: #666;
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
+  margin-bottom: 15px;
 }
 
-.addToCartButton {
-  padding: 0.8rem 1.5rem;
+/* Diğer button veya genel stilleriniz varsa buraya ekleyin */
+.btn {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
 }
 
-@media (max-width: 480px) {
-  .productItem {
-    padding: 1rem; /* Mobil cihazlarda daha az padding */
-  }
-  .productItem h3 {
-      font-size: 1.2rem;
-  }
-  .productItem p {
-      font-size: 1rem;
-  }
-  .addToCartButton {
-      padding: 0.7rem 1.2rem;
-      font-size: 0.9rem;
-  }
+.btn-primary {
+  background-color: #8B4513; /* Koyu kahve tonu */
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #A0522D; /* Daha açık kahve tonu */
 }

@@ -1,48 +1,52 @@
 /* src/styles/Cart.module.css */
-.mainContent {
-  padding: 2rem;
+
+.emptyCartMessage {
+  text-align: center;
+  padding: 50px 0;
+  font-size: 1.2em;
+  color: var(--text-dark);
+}
+
+.emptyCartMessage p {
+  margin-bottom: 30px;
+}
+
+.cartContent {
+  background-color: var(--bg-light);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px var(--shadow-light);
+  padding: 30px;
+  margin-top: 40px;
 }
 
 .cartList {
   list-style: none;
   padding: 0;
+  margin-bottom: 30px;
 }
 
-/* .cartItem stilleri CartItemCard.module.css'e taşındı */
+.cartSummary {
+  text-align: right;
+  border-top: 1px solid var(--secondary-cream);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Sağ tarafa yasla */
+}
 
 .cartTotal {
-  margin-top: 2rem;
-  text-align: right;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #333;
+  font-size: 1.8em;
+  color: var(--primary-coffee);
+  margin-bottom: 20px;
+  font-weight: 700;
 }
 
-.checkoutButton {
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  margin-top: 1.5rem;
-  width: 100%;
-}
-
-.emptyCartMessage {
-    font-size: 1.2rem;
-    color: #666;
-    text-align: center;
-    margin-top: 3rem;
-}
-
-.emptyCartMessage a {
-    color: #0070f3;
-    text-decoration: underline;
-}
-
-@media (max-width: 480px) {
-  .cartTotal {
-      font-size: 1.3rem;
+/* Duyarlı tasarım */
+@media (max-width: 768px) {
+  .cartContent {
+    padding: 20px;
   }
-  .checkoutButton {
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
+  .cartTotal {
+    font-size: 1.5em;
   }
 }

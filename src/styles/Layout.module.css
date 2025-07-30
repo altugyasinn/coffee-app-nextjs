@@ -1,0 +1,11 @@
+/* src/styles/Layout.module.css */
+.layoutContainer {
+  /* buraya layout stil tanımlamalarınızı ekleyebilirsiniz */
+  min-height: 100vh; /* Sayfanın en az viewport yüksekliği kadar olmasını sağlar */
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent {
+  flex-grow: 1; /* main içeriğinin boşluğu doldurmasını sağlar */
+}

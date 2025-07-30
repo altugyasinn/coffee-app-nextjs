@@ -1,0 +1,97 @@
+/* src/components/Footer.module.css */
+
+.footer {
+  background-color: var(--bg-dark); /* Koyu arka plan rengi */
+  color: var(--text-light); /* Açık metin rengi */
+  padding: 60px 0 30px 0; /* Üstten daha fazla boşluk */
+  margin-top: 50px; /* Üstteki içerikle arasında boşluk bırak */
+}
+
+.footerContent {
+  display: flex;
+  flex-wrap: wrap; /* Küçük ekranlarda alt alta geçiş için */
+  justify-content: space-between;
+  gap: 30px; /* Bölümler arası boşluk */
+  text-align: left; /* Metni sola hizala */
+  margin-bottom: 40px;
+}
+
+.footerSection {
+  flex: 1; /* Esnek genişlik */
+  min-width: 250px; /* Minimum genişlik */
+}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5em;
+  color: var(--accent-gold); /* Altın rengi başlık */
+  margin-bottom: 25px;
+}
+
+.footerSection p {
+  font-size: 0.95em;
+  line-height: 1.7;
+  margin-bottom: 15px;
+}
+
+.socialLinks {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.socialIcon {
+  color: var(--text-light);
+  font-size: 1.5em;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.socialIcon:hover {
+  color: var(--accent-gold);
+  transform: translateY(-3px);
+}
+
+.footerLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerLinks li {
+  margin-bottom: 10px;
+}
+
+.footerLink {
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+}
+
+.footerLink:hover {
+  color: var(--accent-gold);
+  text-decoration: underline;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Duyarlı Tasarım */
+@media (max-width: 768px) {
+  .footerContent {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footerSection {
+    margin-bottom: 30px;
+  }
+  .socialLinks {
+    justify-content: center;
+  }
+}

@@ -1,104 +1,99 @@
 // src/context/CartContext.tsx
-import { createContext, useContext, useState, useEffect, ReactNode } from "react"; // useEffect'i de import ettik
+import React, { createContext, useState, useEffect, useContext, ReactNode, useCallback } from 'react';
 
-type Coffee = {
-  id: number;
+// Sepet öğesi için interface - ID'nin string olduğundan emin olun!
+export interface CartItem { // Export edin ki diğer dosyalarda kullanabilelim
+  id: string; // ID tipi string olmalı
   name: string;
   price: number;
-};
-
-// Sepet öğesi tipi: Ürünün kendisi ve adedi
-type CartItem = Coffee & {
   quantity: number;
-};
+  image: string;
+}
 
-type CartContextType = {
+// Sepet bağlamı tipi
+interface CartContextType {
   cartItems: CartItem[];
-  addToCart: (item: Coffee) => void;
-  removeFromCart: (id: number) => void;
-  updateCartItemQuantity: (id: number, newQuantity: number) => void;
+  addItem: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
+  removeItem: (id: string) => void; // removeFromCart yerine removeItem
   clearCart: () => void;
-  getCartTotal: () => number;
-};
+  getTotalPrice: () => number; // getTotal yerine getTotalPrice
+  getTotalItems: () => number;
+  updateQuantity: (id: string, newQuantity: number) => void;
+}
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
-  // Sepet öğelerini localStorage'dan yükle veya boş bir dizi ile başlat
-  // useState'in başlatıcısı olarak bir fonksiyon kullanmak, sadece ilk render'da çalışmasını sağlar.
+interface CartProviderProps {
+  children: ReactNode;
+}
+
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    // Sunucu tarafında (SSR) veya Node.js ortamında çalışırken 'window' objesi bulunmayabilir.
-    // Bu yüzden 'typeof window !== 'undefined'' kontrolü önemlidir.
     if (typeof window !== 'undefined') {
       try {
-        const savedCart = localStorage.getItem('cart');
+        const savedCart = localStorage.getItem('cartItems');
         return savedCart ? JSON.parse(savedCart) : [];
-      } catch (error) {
-        console.error("Failed to parse cart from localStorage", error);
-        return []; // Hata durumunda boş sepetle başla
+      } catch (e) {
+        console.error("Failed to parse cart items from localStorage", e);
+        return [];
       }
     }
-    return []; // Tarayıcı ortamı değilse boş sepetle başla
+    return [];
   });
 
-  // cartItems her değiştiğinde localStorage'a kaydet
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('cart', JSON.stringify(cartItems));
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }
-  }, [cartItems]); // cartItems bağımlılığı sayesinde her değiştiğinde bu effect çalışır
+  }, [cartItems]);
 
-  const addToCart = (item: Coffee) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find((cartItem) => cartItem.id === item.id);
-
+  const addItem = useCallback((item: Omit<CartItem, 'quantity'>, quantityToAdd: number = 1) => {
+    setCartItems(prevItems => {
+      const existingItem = prevItems.find(i => i.id === item.id);
       if (existingItem) {
-        // Ürün sepette varsa miktarını artır
-        return prevItems.map((cartItem) =>
-          cartItem.id === item.id
-            ? { ...cartItem, quantity: cartItem.quantity + 1 }
-            : cartItem
+        return prevItems.map(i =>
+          i.id === item.id ? { ...i, quantity: i.quantity + quantityToAdd } : i
         );
       } else {
-        // Ürün sepette yoksa yeni olarak ekle
-        return [...prevItems, { ...item, quantity: 1 }];
+        return [...prevItems, { ...item, quantity: quantityToAdd }];
       }
     });
-  };
+  }, []);
 
-  const removeFromCart = (id: number) => {
-    setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-  };
+  const removeItem = useCallback((id: string) => { // removeFromCart yerine removeItem
+    setCartItems(prevItems => prevItems.filter(item => item.id !== id));
+  }, []);
 
-  const updateCartItemQuantity = (id: number, newQuantity: number) => {
-    if (newQuantity <= 0) {
-      removeFromCart(id); // Miktar 0 veya altına düşerse ürünü kaldır
-      return;
-    }
-    setCartItems((prevItems) =>
-      prevItems.map((item) =>
+  const updateQuantity = useCallback((id: string, newQuantity: number) => {
+    setCartItems(prevItems =>
+      prevItems.map(item =>
         item.id === id ? { ...item, quantity: newQuantity } : item
       )
     );
-  };
+  }, []);
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     setCartItems([]);
-  };
+  }, []);
 
-  const getCartTotal = () => {
+  const getTotalPrice = useCallback(() => { // getTotal yerine getTotalPrice
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
+  }, [cartItems]);
+
+  const getTotalItems = useCallback(() => {
+    return cartItems.reduce((total, item) => total + item.quantity, 0);
+  }, [cartItems]);
 
   return (
     <CartContext.Provider
       value={{
         cartItems,
-        addToCart,
-        removeFromCart,
-        updateCartItemQuantity,
+        addItem,
+        removeItem,
         clearCart,
-        getCartTotal,
+        getTotalPrice,
+        getTotalItems,
+        updateQuantity,
       }}
     >
       {children}
@@ -108,6 +103,8 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) throw new Error("useCart must be used within CartProvider");
+  if (context === undefined) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
   return context;
 };

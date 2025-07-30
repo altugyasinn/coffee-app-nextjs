@@ -1,20 +1,106 @@
 /* src/styles/Home.module.css */
-.mainContent {
-  padding: 2rem;
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background-image: url('/images/coffee-hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Tekrar etmemesi önemli */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  color: var(--text-light); /* Metin rengi beyaz */
+  overflow: hidden;
+  z-index: 1;
 }
 
-.mainContent h1 {
-  color: #333;
-  margin-bottom: 1rem;
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Opaklığı artırarak metin okunurluğunu iyileştir */
+  z-index: 2;
 }
 
-.mainContent p {
-  color: #666;
-  font-size: 1.1rem;
+.heroContent {
+  z-index: 3; /* Metin ve buton görselin ve overlay'in önünde olmalı */
+  position: relative; /* z-index'in çalışması için */
+  max-width: 900px; /* Metin genişliğini artır */
+  padding: 20px;
+  margin: 0 auto; /* Ortalamak için */
 }
 
-.mainContent a {
-  color: #0070f3;
-  text-decoration: underline;
+.heroTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.8em; /* Daha büyük başlık */
+  margin-bottom: 25px; /* Alt boşluk */
+  line-height: 1.1;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8); /* Daha belirgin gölge */
+}
+
+.heroSubtitle {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.6em; /* Daha büyük alt başlık */
+  margin-bottom: 50px; /* Alt boşluk */
+  line-height: 1.6;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Daha belirgin gölge */
+}
+
+.hero-btn { /* globals.css'teki .btn ve .btn-primary ile birleşecek */
+    margin-top: 20px;
+    padding: 18px 35px; /* Daha büyük buton */
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+/* Duyarlı Tasarım (Responsive Design) */
+@media (max-width: 1024px) {
+  .heroTitle {
+    font-size: 3.8em;
+  }
+  .heroSubtitle {
+    font-size: 1.4em;
+  }
+  .hero-btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    height: 60vh;
+  }
+  .heroTitle {
+    font-size: 2.8em;
+  }
+  .heroSubtitle {
+    font-size: 1.2em;
+  }
+  .hero-btn {
+    padding: 12px 25px;
+    font-size: 1.1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    height: 50vh;
+  }
+  .heroTitle {
+    font-size: 2.2em;
+  }
+  .heroSubtitle {
+    font-size: 1em;
+  }
+  .hero-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
 }

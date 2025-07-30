@@ -1,20 +1,32 @@
-// src/pages/index.tsx
+// src/pages/index.tsx - Ana Sayfanızın içeriği
 import Head from 'next/head';
-import styles from '../styles/Home.module.css'; // CSS Modülünü import ediyoruz
+import Link from 'next/link';
+import styles from '@/styles/Home.module.css'; // Home.module.css'i kullanın
 
-export default function HomePage() {
+const HomePage: React.FC = () => {
   return (
-    <div>
+    <>
       <Head>
         <title>Kahve Dükkanı</title>
-        <meta name="description" content="Hoş Geldiniz!" />
+        <meta name="description" content="En taze kahveler burada!" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.mainContent}> {/* class'ı uyguluyoruz */}
-        <h1>Kahve Dükkanımıza Hoş Geldiniz!</h1>
-        <p>En taze kahvelerimiz için <a href="/products">ürünler sayfamızı</a> ziyaret edin.</p>
-      </main>
-    </div>
+      {/* main etiketi Layout bileşeninde sarıldığı için, burada sadece içeriği veriyoruz */}
+      {/* Hero Section */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>Kahve Dükkanımıza Hoş Geldiniz!</h1>
+          <p className={styles.heroSubtitle}>Gününüzü özel kılacak en taze ve özenle seçilmiş kahveler burada.</p>
+          <Link href="/products" className="btn btn-primary">
+            Ürünlerimizi Keşfedin
+          </Link>
+        </div>
+      </section>
+
+      {/* Diğer bölümler buraya gelebilir */}
+    </>
   );
-}
+};
+
+export default HomePage;

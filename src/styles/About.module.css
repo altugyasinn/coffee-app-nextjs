@@ -1,31 +1,48 @@
 /* src/styles/About.module.css */
-.mainContent {
-  padding: 2rem;
-  max-width: 800px;
-  margin: 0 auto;
-  line-height: 1.8;
+
+.aboutSection {
+  padding: 80px 0; /* Üstten ve alttan daha fazla boşluk */
+  background-color: var(--secondary-cream); /* Açık krem arka plan */
+  color: var(--text-dark); /* Koyu metin */
+  text-align: center; /* Başlıklar ve genel hizalama için */
 }
 
-.mainContent h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  font-size: 2.5rem;
+.aboutTitle {
+  font-size: 3em; /* Daha büyük başlık */
+  color: var(--primary-coffee); /* Kahve rengi başlık */
+  margin-bottom: 40px; /* Başlık altında daha fazla boşluk */
+  position: relative;
+  padding-bottom: 10px; /* Alt çizgi için boşluk */
 }
 
-.mainContent p {
-  margin-bottom: 1rem;
-  color: #555;
-  font-size: 1.1rem;
+/* Başlık altına dekoratif çizgi */
+.aboutTitle::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100px; /* Çizgi genişliği */
+  height: 3px;
+  background-color: var(--accent-gold); /* Altın rengi çizgi */
 }
 
+.aboutParagraph {
+  font-size: 1.1em; /* Paragraf metin boyutu */
+  line-height: 1.8; /* Satır aralığı */
+  max-width: 900px; /* Metin genişliğini artırıyoruz */
+  margin: 0 auto 30px auto; /* Ortala ve alttan boşluk */
+  text-align: justify; /* Metni iki yana yasla */
+  padding: 0 20px; /* Kenarlardan boşluk */
+}
+
+/* Responsive ayarlar */
 @media (max-width: 768px) {
-  .mainContent {
-      padding: 1.5rem;
+  .aboutTitle {
+    font-size: 2.5em;
   }
-  .mainContent h1 {
-      font-size: 2rem;
-  }
-  .mainContent p {
-      font-size: 1rem;
+  .aboutParagraph {
+    font-size: 1em;
+    text-align: left; /* Küçük ekranlarda sola hizala daha iyi olabilir */
   }
 }

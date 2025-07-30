@@ -1,37 +1,100 @@
 /* src/components/Navbar.module.css */
-.nav {
+
+.navbar {
+  width: 100%;
+  background-color: var(--primary-coffee); /* Ana kahve rengi */
+  padding: 15px 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  height: 80px;
+  --navbar-height: 80px; /* Layout için CSS değişkeni */
+  display: flex; /* Flexbox kullanarak içeriği hizala */
+  align-items: center; /* Dikeyde ortala */
+}
+
+.navbarContent {
   display: flex;
-  justify-content: space-around; /* Masaüstünde */
-  padding: 1rem;
-  background-color: #eee;
-  border-bottom: 1px solid #ddd;
-  flex-wrap: wrap; /* Öğeler sığmadığında alt satıra geçsin */
+  justify-content: space-between; /* Brand'i sola, linkleri sağa it */
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* İçeriğin maksimum genişliği */
+  margin: 0 auto; /* Ortalamak için */
+  padding: 0 20px; /* Yanlardan boşluk */
 }
 
-.nav a {
-  color: #0070f3;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  transition: background-color 0.2s ease-in-out;
-  margin: 0.25rem; /* Her link arasına küçük boşluk */
+.navbarBrand {
+  color: var(--text-light); /* Beyaz metin */
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.nav a:hover {
-  background-color: #ddd;
+.navbarBrand:hover {
+  color: var(--accent-gold); /* Hover'da altın rengi */
 }
 
-/* Mobil cihazlarda ortala veya sütun yapısına geçebiliriz */
+.navLinks {
+  list-style: none;
+  display: flex;
+  gap: 40px; /* Menü öğeleri arasındaki boşluğu artırdık */
+  margin: 0; /* Liste varsayılan marginlerini sıfırla */
+  padding: 0; /* Liste varsayılan paddinglerini sıfırla */
+}
+
+.navItem {
+  color: var(--text-light);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1em;
+  transition: color 0.3s ease, transform 0.2s ease;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.navItem:hover {
+  color: var(--accent-gold);
+  transform: translateY(-2px); /* Hafif yukarı kaydırma efekti */
+}
+
+/* Alt çizgi efekti */
+.navItem::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--accent-gold);
+  transition: width 0.3s ease-out;
+}
+
+.navItem:hover::after {
+  width: 100%;
+}
+
+/* Duyarlı tasarım için küçük ekranlarda Navbar */
 @media (max-width: 768px) {
-  .nav {
-    flex-direction: column; /* Dikey sırala */
-    align-items: center; /* Ortala */
-    padding: 0.5rem; /* Daha az padding */
+  .navbar {
+    height: auto; /* Yüksekliği içeriğe göre ayarla */
+    flex-direction: column; /* Dikey hizala */
+    padding: 10px 0;
   }
-
-  .nav a {
-    width: 90%; /* Genişliği artır */
-    text-align: center; /* Metni ortala */
-    margin-bottom: 0.5rem; /* Altlarında boşluk */
+  .navbarContent {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .navLinks {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  .navItem {
+    font-size: 1em;
   }
 }

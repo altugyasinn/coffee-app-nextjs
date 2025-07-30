@@ -1,40 +1,47 @@
 // src/components/CartItemCard.tsx
-import React, { memo } from 'react'; // 'memo'yu import ettik
-import { useCart } from '@/context/CartContext';
+import React from 'react';
+import { useCart, CartItem } from '@/context/CartContext'; // CartItem'ı da import edin
 import styles from './CartItemCard.module.css';
 
-type Coffee = {
-  id: number;
-  name: string;
-  price: number;
-};
+interface CartItemCardProps {
+  item: CartItem; // CartItem tipini CartContext'ten alın
+}
 
-type CartItem = Coffee & {
-  quantity: number;
-};
+const CartItemCard: React.FC<CartItemCardProps> = ({ item }) => {
+  const { removeItem, updateQuantity } = useCart(); // removeItem kullanın
 
-type CartItemCardProps = {
-  item: CartItem;
-};
+  const handleRemoveItem = () => {
+    removeItem(item.id); // removeItem'ı çağır
+  };
 
-// CartItemCard bileşenini React.memo ile sarmalıyoruz
-const CartItemCard: React.FC<CartItemCardProps> = memo(({ item }) => { // memo kullanıldı
-  const { removeFromCart, updateCartItemQuantity } = useCart(); // Bu fonksiyonlar da context'ten geldiği için stabil kabul edilebilir.
+  const handleDecreaseQuantity = () => {
+    if (item.quantity > 1) {
+      updateQuantity(item.id, item.quantity - 1);
+    } else {
+      removeItem(item.id);
+    }
+  };
 
-  console.log(`CartItemCard (${item.name}) rendered`); // Render sayısını görmek için eklendi
+  const handleIncreaseQuantity = () => {
+    updateQuantity(item.id, item.quantity + 1);
+  };
 
   return (
     <li className={styles.cartItem}>
-      <span>
-        {item.name} - {item.price}₺ x {item.quantity} = {item.price * item.quantity}₺
-      </span>
-      <div>
-        <button onClick={() => updateCartItemQuantity(item.id, item.quantity - 1)} className={styles.quantityButton}>-</button>
-        <button onClick={() => updateCartItemQuantity(item.id, item.quantity + 1)} className={styles.quantityButton}>+</button>
-        <button onClick={() => removeFromCart(item.id)} className={styles.removeButton}>Sil</button>
+      <img src={item.image} alt={item.name} className={styles.itemImage} />
+      <div className={styles.itemDetails}>
+        <span className={styles.itemName}>{item.name}</span>
+        <span className={styles.itemPrice}>{item.price}₺</span>
       </div>
+      <div className={styles.quantityControl}>
+        <button onClick={handleDecreaseQuantity} className={styles.quantityBtn}>-</button>
+        <span className={styles.itemQuantity}>{item.quantity}</span>
+        <button onClick={handleIncreaseQuantity} className={styles.quantityBtn}>+</button>
+      </div>
+      <span className={styles.itemTotal}>{(item.price * item.quantity).toFixed(2)}₺</span>
+      <button onClick={handleRemoveItem} className={`${styles.removeBtn} btn btn-danger`}>Sil</button>
     </li>
   );
-}); // memo() ile kapatıldı
+};
 
 export default CartItemCard;

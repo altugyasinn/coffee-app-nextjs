@@ -1,26 +1,43 @@
 /* src/styles/Products.module.css */
-.mainContent {
-  padding: 2rem;
+
+.productsContainer {
+  padding: 20px;
+  max-width: 1200px; /* İçeriği ortalamak ve çok geniş olmamasını sağlamak için */
+  margin: 0 auto; /* Ortalamak için */
 }
 
 .productList {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Masaüstü ve tablet */
-  gap: 1.5rem;
+  display: flex; /* Flexbox'ı etkinleştir */
+  flex-wrap: wrap; /* Kartlar sığmadığında alt satıra geçmesini sağlar */
+  gap: 20px; /* Kartlar arasında boşluk bırakır */
+  justify-content: center; /* Kartları yatayda ortalar */
+  margin-top: 20px;
 }
 
+/* Eğer ProductCard.module.css'te de margin varsa, burada gap kullanmak daha iyidir. */
+/* Eğer ProductCard'a manuel margin verdiyseniz, burada gap'i ayarlamanız gerekebilir */
+
+/* Başlık stilleri */
+.productsContainer h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #333;
+  font-size: 2.5em;
+}
+
+/* Responsive tasarım için medya sorguları (isteğe bağlı ama önerilir) */
 @media (max-width: 768px) {
   .productList {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Tabletlerde 200px min genişlik */
-    gap: 1rem;
+    flex-direction: column; /* Küçük ekranlarda alt alta sırala */
+    align-items: center; /* Ortala */
+  }
+  .productCard {
+    width: 90%; /* Küçük ekranlarda daha geniş kartlar */
   }
 }
 
 @media (max-width: 480px) {
-  .productList {
-    grid-template-columns: 1fr; /* Mobil cihazlarda tek sütun */
-    gap: 1rem;
+  .productCard {
+    width: 100%; /* Çok küçük ekranlarda tam genişlik */
   }
 }
